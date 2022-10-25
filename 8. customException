@@ -1,0 +1,33 @@
+
+# custom exception
+
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
+
+
+class FruitException(Exception):
+    def __init__(self, name : str):
+        self.name = name
+
+
+app = FastAPI()
+
+@app.get("/")
+def hello():
+    return {"hello" : "world"}
+
+@app.exception_handler(FruitException)
+def fruit_exception_handler(request : Request, exc :FruitException):
+    return JSONResponse(
+        status_code=450,
+        content={"message": f"Fruit - {exc.name}  season is gone"}
+    )
+    
+    
+fruit = {"orange":"This fruit is sour"}
+
+@app.get("/fruit/{fruit_name}")
+def read_fruit(fruit_name :str):
+    if fruit_name == "Guava":
+        raise FruitException(name=fruit_name)
+    return {"fruit is available": fruit_name}

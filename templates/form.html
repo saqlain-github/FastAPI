@@ -1,0 +1,17 @@
+<html>
+<head>
+    <title>Item Details</title>
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+</head>
+<body>
+    <h1>Addition</h1>
+    <form method="post" action="/basic/" enctype="multipart/form-data">
+        <label for="first_no">Enter first number: </label>
+        <input type="text" name="first_no"><br>
+        <label for="second_no">Enter second number: </label>
+        <input type="text" name="second_no"><br>
+        <input type="file" name="file"><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
